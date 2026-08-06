@@ -1,0 +1,28 @@
+{
+  "name": "projeto-de-sistemas-web",
+  "version": "1.0.0",
+  "description": "Exemplos de código usados em aula",
+  "keywords": [
+    "Nodejs",
+    "Sistemas Web",
+    "Web"
+  ],
+  "homepage": "https://github.com/Paleo-001/psw#readme",
+  "bugs": {
+    "url": "https://github.com/Paleo-001/psw/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paleo-001/psw.git"
+  },
+  "license": "ISC",
+  "author": "undefined",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "http": "^0.0.1-security"
+  }
+}
