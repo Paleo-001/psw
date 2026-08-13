@@ -1,0 +1,20 @@
+{
+  "name": "meuapp",
+  "version": "1.0.0",
+  "description": "Meu aplicativo Nodejs",
+  "keywords": [
+    "Nodejs",
+    "Express",
+    "Aplicativo"
+  ],
+  "license": "ISC",
+  "author": "Carlos F P Rocha",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
