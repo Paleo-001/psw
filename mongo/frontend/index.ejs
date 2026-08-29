@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+</head>
+<body>
+    <h1>Inserir Novo Usuário</h1>
+    <form action="/salvar" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" required>
+        </div>
+        <br>
+        <div>
+            <label for="idade">Idade:</label>
+            <input type="number" name="idade" id="idade" min="0" max="120" required>
+        </div>
+        <br>
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" required>
+        </div>
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários Cadastrados</title>
+    <style>
+        th, td { border: 1px solid}
+    </style>
+</head>
+<body>
+    <h1>Usuários Cadastrados</h1>
+    <a href="/cadastro">Cadastrar Novo Usuário</a>
+    <% if (usuarios.length > 0){ %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>email</th>
+                    <th>ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% usuarios.forEach(function(usuario) { %>
+                    <tr>
+                        <td><%= usuario.nome %></td>
+                        <td><%= usuario.idade %></td>
+                        <td><%= usuario.email %></td>
+                        <td>
+                            <a href="/editar/<%= usuario._id %>">Alterar</a>
+                            <a href="/excluir/<%= usuario._id %>">Excluir</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>
