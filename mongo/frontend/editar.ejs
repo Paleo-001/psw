@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif; margin: 30px;}
+        .card {background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; width: 400px; border-radius: 5px;}
+        .btn-danger {background-color: #dc3545; color: white; padding: 8px 15px; border: none; cursor: pointer; border-radius: 4px;}
+        a {background-color: yellow; padding: 8px 15px; text-decoration: none; border-radius: 4px;}
+    </style>
+</head>
+<body>
+    <h1>Alterar dados do usuário</h1>
+    <form action="/editar/<%= usuario._id %>" method="post">
+        <div class="campo">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="<%= usuario.nome %>" required>
+        </div><br>
+        <div class="campo">
+            <label for="idade">Idade:</label>
+            <input type="number" name="idade" id="idade" min="0" max="120" value="<%= usuario.idade %>" required>
+        </div><br>
+        <div class="campo">
+            <label for="email">Email:</label>
+            <input type="text" name="email" value="<%= usuario.email %>" required>
+        </div>
+        <br>
+        <button type="submit" class="btn-danger">Alterar dados</button>
+        <a href="/">Cancelar</a>        
+    </form>
+</body>
+</html>

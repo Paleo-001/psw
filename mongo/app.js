@@ -21,7 +21,7 @@ app.post('/salvar', async (req,res) => {
         const { nome, idade, email } = req.body;
         const novoUsuario = new Usuario({ nome, idade, email});
         await novoUsuario.save();
-        res.send('Usuário salvo com sucesso!');
+        res.redirect('/');
     } catch(err) {
         console.error('Erro ao salvar usuário', err);
         res.status(500).send('Erro ao salvar usuário');
@@ -44,8 +44,48 @@ app.get('/excluir/:id', async (req,res) => {
         if (!usuario) {
             return res.status(404).send('Usuário não encontrado!');
         }
+        res.render('excluir', { usuario });
     } catch (error) {
-        
+        console.error('Erro ao buscar usuário para exclusão:',error);
+        res.status(500).send('Erro ao carregar confirmação.');
+    }
+});
+
+app.post('/excluir/:id', async (req,res) => {
+    try {
+        await Usuario.findByIdAndDelete(req.params.id);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Erro ao excluir usuário:',error);
+        res.status(500).send('Erro ao excluir usuário');
+    }
+});
+
+app.get('/editar/:id', async (req,res) => {
+    try {
+        const usuario = await Usuario.findById(req.params.id);
+        if (!usuario) {
+            return res.status(404).send('Usuário não encontrado!');
+        }
+        res.render('editar', { usuario });
+    } catch (error) {
+        console.error('Erro ao buscar usuário:',error);
+        res.status(500).send('Erro ao carregar edição de usuário');
+    }
+});
+
+app.post('/editar/:id', async (req,res) => {
+    try {
+        const { nome, idade, email } = req.body;
+        await Usuario.findByIdAndUpdate(req.params.id, {
+            nome,
+            idade: Number(idade),
+            email
+        });
+        res.redirect('/');
+    } catch (error) {
+        console.error('Erro ao alterar usuário:',error);
+        res.status(500).send('Erro ao editar usuário');        
     }
 });
 

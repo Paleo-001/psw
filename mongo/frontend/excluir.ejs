@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação Exclusão</title>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif; margin: 30px;}
+        .card {background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; width: 400px; border-radius: 5px;}
+        .btn-danger {background-color: #dc3545; color: white; padding: 8px 15px; border: none; cursor: pointer; border-radius: 4px;}
+        a {background-color: yellow; padding: 8px 15px; text-decoration: none; border-radius: 4px;}
+    </style>
+</head>
+<body>
+    <h1>Excluir usuário</h1>
+    <div class="card">
+        <p>Tem certeza que deseja excluir o seguinte usuário?</p>
+        <ul>
+            <li><strong>Nome: </strong><%= usuario.nome %></li>
+            <li><strong>e-mail: </strong><%= usuario.email %></li>
+            <li><strong>Idade: </strong><%= usuario.idade %> anos.</li>
+        </ul>
+        <form action="/excluir/<%= usuario._id %>" method="post">
+            <button type="submit" class="btn-danger">Confirmar exclusão</button>
+            <a href="/">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
