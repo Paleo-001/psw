@@ -7,12 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('portal:server');
 var http = require('http');
+require('dotenv').config();
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
+console.log(process.env.PORT || "Não achei");
+
 app.set('port', port);
 
 /**
