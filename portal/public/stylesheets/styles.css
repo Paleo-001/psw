@@ -1,0 +1,25 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+
+main {
+  flex: 1;
+}
+
+.carousel {
+  height: 400px;
+  object-fit: cover;
+}
+
+.card-noticia {
+  border: none;
+  transition: transform 0.2s;
+}
+.card-noticia:hover {
+  transform: translateY(-4px);
+}
+
+/*# sourceMappingURL=styles.css.map */

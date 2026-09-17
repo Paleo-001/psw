@@ -15,7 +15,7 @@ const {
 
 // Importar Rotas
 const rotasNavegacao = require('./routes/navegacao');
-// const rotasAdministracao = '';
+const rotasAdministracao = require('./routes/administracao');
 
 const app = express();
 
@@ -38,7 +38,7 @@ app.use(sanitizarEntradas);
 
 // Prefixos de Rotas
 app.use('/', rotasNavegacao);
-// app.use('/admin', verificarPermissaoAdmin, rotasAdministracao);
+app.use('/admin', rotasAdministracao);
 
 // Capturar 404 e tratar erros
 app.use(rotaNaoEncontrada);

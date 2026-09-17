@@ -5,7 +5,7 @@
   "scripts": {
     "inicio": "node ./bin/www",
     "desenv": "node --watch ./bin/www",
-    "compilar": "sass --watch sass:public/stylesheets"
+    "compilar": "sass sass:public/stylesheets"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
