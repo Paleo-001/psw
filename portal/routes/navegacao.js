@@ -27,6 +27,7 @@ router.get('/', async (req,res,next) => {
 
         res.render('index', {
             titulo: 'Portal Dev - Início',
+            slides,
             noticiasRSS
         });
     } catch (erro) {
