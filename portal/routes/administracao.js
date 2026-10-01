@@ -14,7 +14,7 @@ router.get('/', async (req,res,next) => {
     }
 });
 
-router.get('/novo', (req,res) => {
+router.get('/novoArtigo', (req,res) => {
     res.render('admin/form', {
         titulo: 'Novo artigo',
         artigo: {},
@@ -22,7 +22,7 @@ router.get('/novo', (req,res) => {
     });
 });
 
-router.post('/salvar', async (req,res,next) => {
+router.post('/salvarArtigo', async (req,res,next) => {
     try {
         const { titulo, resumo, conteudo, imagem, destaque } = req.body;
         await Artigo.create({
@@ -38,7 +38,7 @@ router.post('/salvar', async (req,res,next) => {
     }
 });
 
-router.post('/excluir/:id', async (req,res,next) => {
+router.post('/excluirArtigo/:id', async (req,res,next) => {
     try {
         await Artigo.findByIdAndDelete(req.params.id);
         res.redirect('/admin');
@@ -47,7 +47,7 @@ router.post('/excluir/:id', async (req,res,next) => {
     }
 });
 
-router.get('/editar/:id', async (req,res,next) => {
+router.get('/editarArtigo/:id', async (req,res,next) => {
     try {
         const artigo = await Artigo.findById(req.params.id);
         if (!artigo) return res.status(404).send('Artigo não encontrado');
@@ -61,7 +61,7 @@ router.get('/editar/:id', async (req,res,next) => {
     }
 });
 
-router.post('/editar/:id', async (req,res,next) => {
+router.post('/editarArtigo/:id', async (req,res,next) => {
     try{
         const {titulo,resumo,conteudo,imagem,destaque}=req.body;
         await Artigo.findByIdAndUpdate(req.params.id,{

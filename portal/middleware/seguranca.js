@@ -17,7 +17,7 @@ const sanitizarEntradas = (req,res,next) => {
 };
 
 const verificarPermissaoAdmin = (req,res,next) => {
-    // Cenas dos próximos capítulos
+    // autenticação JWT
     next();
 };
 

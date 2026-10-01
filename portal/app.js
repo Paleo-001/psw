@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const conectarBanco = require('./config/db');
+const bodyParser = require('body-parser');
 
 // Importar Middlewares
 const {
@@ -38,7 +39,7 @@ app.use(sanitizarEntradas);
 
 // Prefixos de Rotas
 app.use('/', rotasNavegacao);
-app.use('/admin', rotasAdministracao);
+app.use('/admin', verificarPermissaoAdmin, rotasAdministracao);
 
 // Capturar 404 e tratar erros
 app.use(rotaNaoEncontrada);
