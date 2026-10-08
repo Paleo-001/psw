@@ -3,10 +3,15 @@ const router = express.Router();
 const Artigo = require('../models/artigo');
 
 router.get('/', async (req,res,next) => {
+    const usuario = req.usuario.nome;
+    const capitalizar = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+    const user = capitalizar(usuario);
+    const saudacao = `- Olá ${user}!`;
     try {
         const artigos = await Artigo.find({}).sort({ criadoEm: -1});
         res.render('admin/index',{
             titulo: 'Painel Administrativo Blog',
+            saudacao,
             artigos
         });
     } catch (erro) {

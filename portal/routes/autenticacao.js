@@ -23,16 +23,18 @@ router.post('/login', async (req,res,next) => {
             });
         }
 
-        const token = jwt.sign({ id: usuario_id }, process.env.JWT_SECRET, { expiresIn: '2h'});
+        const token = jwt.sign({ id: usuario._id, nome: usuario.nome }, process.env.JWT_SECRET, { expiresIn: '2h'});
 
-        res.cookie('token', { httpOnly: true });
-        res.redirect('/');
+        res.cookie('token', token, { httpOnly: true });
+        res.redirect('/admin');
     } catch (erro){
         next(erro);
     }
 });
 
-router.get('/logout', (res,req) => {
+router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
 });
+
+module.exports = router;

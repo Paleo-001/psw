@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const conectarBanco = require('./config/db');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 // Importar Middlewares
 const {
@@ -17,6 +18,7 @@ const {
 // Importar Rotas
 const rotasNavegacao = require('./routes/navegacao');
 const rotasAdministracao = require('./routes/administracao');
+const rotasAutenticacao = require('./routes/autenticacao');
 
 const app = express();
 
@@ -39,6 +41,7 @@ app.use(sanitizarEntradas);
 
 // Prefixos de Rotas
 app.use('/', rotasNavegacao);
+app.use('/', rotasAutenticacao);
 app.use('/admin', verificarPermissaoAdmin, rotasAdministracao);
 
 // Capturar 404 e tratar erros
