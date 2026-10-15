@@ -18,8 +18,8 @@
                     <td><%= artigo. titulo %></td>
                     <td><%= artigo.destaque ? 'Sim' : 'Não' %></td>
                     <td>
-                        <a href="/admin/editar/<%= artigo._id %>" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="/admin/excluir/<%= artigo._id %>" method="post" class="d-inline">
+                        <a href="/admin/editarArtigo/<%= artigo._id %>" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="/admin/excluirArtigo/<%= artigo._id %>" method="post" class="d-inline">
                             <button class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir?')">Excluir</button>
                         </form>
                     </td>

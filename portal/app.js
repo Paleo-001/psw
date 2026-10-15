@@ -19,6 +19,7 @@ const {
 const rotasNavegacao = require('./routes/navegacao');
 const rotasAdministracao = require('./routes/administracao');
 const rotasAutenticacao = require('./routes/autenticacao');
+const rotasTestagem = require('./routes/testagem');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(sanitizarEntradas);
 app.use('/', rotasNavegacao);
 app.use('/', rotasAutenticacao);
 app.use('/admin', verificarPermissaoAdmin, rotasAdministracao);
+app.use('/teste', verificarPermissaoAdmin, rotasTestagem);
 
 // Capturar 404 e tratar erros
 app.use(rotaNaoEncontrada);

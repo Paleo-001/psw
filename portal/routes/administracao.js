@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Artigo = require('../models/artigo');
+const Usuario = require('../models/usuario');
+const bcrypt = require('bcryptjs');
 
 router.get('/', async (req,res,next) => {
     const usuario = req.usuario.nome;
@@ -79,6 +81,36 @@ router.post('/editarArtigo/:id', async (req,res,next) => {
         res.redirect('/admin');
     } catch (erro){
         next(erro);
+    }
+});
+
+router.get('/registrarAdmin', (req,res) => {
+    res.render('admin/criar-admin', {
+        titulo: 'Criar novo administrador',
+        erro: null
+    })
+});
+
+router.post('/registrarAdmin', async (req,res,next) => {
+    try {
+        const { nome, senha } = req.body;
+        const usuarioExistente = await Usuario.findOne({ nome });
+        if (usuarioExistente) {
+            return res.render('admin/criar-admin', {
+              titulo: 'Criar novo administrador',
+              erro: 'Este nome de usuário já está em uso.'  
+            });
+        }
+        const senhaCriptografada = bcrypt.hashSync(senha,10);
+
+        await Usuario.create({
+            nome,
+            senha: senhaCriptografada
+        });
+        res.redirect('/login');
+    } catch (erro) {
+        next(erro);
+        
     }
 });
 
