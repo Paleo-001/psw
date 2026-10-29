@@ -11,7 +11,7 @@ router.get('/login', (req,res) => {
     })
 });
 
-router.post('/login', async (req,res,next) => {
+/* router.post('/login', async (req,res,next) => {
     try{
         const {nome, senha } = req.body;
         const usuario = await Usuario.findOne({ nome });
@@ -31,7 +31,7 @@ router.post('/login', async (req,res,next) => {
         next(erro);
     }
 });
-
+*/
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
