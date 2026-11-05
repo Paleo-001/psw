@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const Usuario = require('../models/usuario');
+const axios = require('axios');
 
 router.get('/login', (req,res) => {
     res.render('login', {
@@ -11,27 +9,31 @@ router.get('/login', (req,res) => {
     })
 });
 
-/* router.post('/login', async (req,res,next) => {
+router.post('/login', async (req,res,next) => {
     try{
         const {nome, senha } = req.body;
-        const usuario = await Usuario.findOne({ nome });
+        const urlAuth = `${process.env.AUTH_SERVICE_URL}`;
 
-        if (!usuario || !bcrypt.compareSync(senha, usuario.senha)) {
-            return res.render('login', {
-                titulo: 'Acesso Restrito',
-                erro: 'Credenciais Inválidas ou Usuário Inexistente'
-            });
-        }
-
-        const token = jwt.sign({ id: usuario._id, nome: usuario.nome }, process.env.JWT_SECRET, { expiresIn: '2h'});
+        const resposta = await axios.post(urlAuth, {nome, senha});
+        const { token } = resposta.data;
 
         res.cookie('token', token, { httpOnly: true });
         res.redirect('/admin');
     } catch (erro){
-        next(erro);
+        if(erro.response && erro.response.status === 491){
+            return res.render('login', {
+                titulo: 'Acesso Restrito',
+                erro: 'Credenciais Inválidas'
+            });
+        }
+        console.error('Erro na chamada ao microsserviço de autenticação: ', erro.message);
+        return res.render('login',{
+            titulo: 'Acesso Restrito',
+            erro: 'Serviço de autenticação temporariamente indisponível.'
+        });
     }
 });
-*/
+
 router.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');

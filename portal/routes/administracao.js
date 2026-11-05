@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Artigo = require('../models/artigo');
-const Usuario = require('../models/usuario');
-const bcrypt = require('bcryptjs');
+const { publicarEvento } = require('../config/mensageria');
+
 
 router.get('/', async (req,res,next) => {
     const usuario = req.usuario.nome;
@@ -39,7 +39,17 @@ router.post('/salvarArtigo', async (req,res,next) => {
             imagem,
             destaque: destaque === 'on'
         });
+
+        publicarEvento({
+            tipo: 'NOVO ARTIGO',
+            id: Artigo._id,
+            titulo: Artigo.titulo,
+            resumo: Artigo.resumo,
+            data: new Date()
+        });
+        
         res.redirect('/admin');
+
     } catch (erro) {
         next(erro);
     }
