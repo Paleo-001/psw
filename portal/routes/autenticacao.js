@@ -12,7 +12,7 @@ router.get('/login', (req,res) => {
 router.post('/login', async (req,res,next) => {
     try{
         const {nome, senha } = req.body;
-        const urlAuth = `${process.env.AUTH_SERVICE_URL}`;
+        const urlAuth = `${process.env.AUTH_SERVICE_URL}/login`;
 
         const resposta = await axios.post(urlAuth, {nome, senha});
         const { token } = resposta.data;

@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Microsserviço de autenticação conectado ao mongoDB'))
     .catch((erro) => console.error('Erro na conexão com o mongoDB: ', erro));
 
-app.post('/login', async (req,res) => {
+app.post('/api/autenticacao/login', async (req,res) => {
     try{
         const {nome, senha } = req.body;
         const usuario = await Usuario.findOne({ nome });

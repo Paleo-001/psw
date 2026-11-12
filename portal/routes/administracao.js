@@ -25,7 +25,7 @@ router.get('/novoArtigo', (req,res) => {
     res.render('admin/form', {
         titulo: 'Novo artigo',
         artigo: {},
-        acao: 'salvar'
+        acao: 'salvarArtigo'
     });
 });
 
@@ -39,12 +39,11 @@ router.post('/salvarArtigo', async (req,res,next) => {
             imagem,
             destaque: destaque === 'on'
         });
-
+    
         publicarEvento({
             tipo: 'NOVO ARTIGO',
-            id: Artigo._id,
-            titulo: Artigo.titulo,
-            resumo: Artigo.resumo,
+            titulo: titulo,
+            resumo: resumo,
             data: new Date()
         });
         
