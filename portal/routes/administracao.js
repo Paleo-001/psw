@@ -70,7 +70,7 @@ router.get('/editarArtigo/:id', async (req,res,next) => {
         res.render('admin/form', {
             titulo: 'Editar artigo',
             artigo,
-            acao: `/admin/editar/${artigo._id}`
+            acao: `/admin/editarArtigo/${artigo._id}`
         });
     } catch (error) {
         next(error);
