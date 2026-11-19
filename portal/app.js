@@ -4,6 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const conectarBanco = require('./config/db');
 const bodyParser = require('body-parser');
+const { registro, middlewareMetricas, contadorArtigosCriados } = require('./config/metricas');
+const logger = require('./config/logger');
 require('dotenv').config();
 
 // Importar Middlewares
@@ -39,6 +41,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middlewares customizados
 app.use(logRequisicoes);
 app.use(sanitizarEntradas);
+app.use(middlewareMetricas);
+
+app.use((req,res,next) => {
+  if (req.path !== '/metricas'){
+    logger.info(`Requisição recebida: ${req.method} ${req.url}`,{
+      metodo: req.method,
+      caminho: req.url,
+      ip: req.ip
+  });
+  }
+  next();
+});
+
+app.get('/metricas', async (req,res) => {
+  try {
+    res.set('Content-Type', registro.contentType);
+    res.end(await registro.metrics());
+  } catch (erro) {
+    logger.error('Erro na geração das métricas do Prometheus', { erro: erro.message });
+    res.status(500).send('Erro interno ao extrair métricas.');
+  }
+});
+
 
 // Prefixos de Rotas
 app.use('/', rotasNavegacao);
