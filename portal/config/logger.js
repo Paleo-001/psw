@@ -18,7 +18,7 @@ try {
     transportes.push(
         new LogstashTransport({
             host: '127.0.0.1',
-            port: 5044
+            port: 5044,
             level: 'info'
         })
     );
